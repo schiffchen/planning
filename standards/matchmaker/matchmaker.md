@@ -2,7 +2,7 @@
 
 This document contains information about all communication between the matchmaker server and the clients.
 
-## Bascis
+## Basics
 
 The matchmaker server is used to initiate gaming sessions between the users. All clients in the system who want to participate in the publich matches have to sign in to the matchmaker.
 
@@ -13,6 +13,7 @@ After the game is done, the server should store statistical information for the 
 ## User management
 
 As the project is using XMPP for its communication, we don't have to worry about user management. Every user has its own XMPP-ID and a ressource for the game itself. The XMPP-ID is stored in the queue so it's easy to assign the players.
+
 
 ### XMPP specific details
 
