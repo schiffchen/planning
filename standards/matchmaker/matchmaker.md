@@ -10,6 +10,8 @@ The server will store all players waiting for a game in a queue as long as they 
 
 After the game is done, the server should store statistical information for the players and should build a "Top 10" list of players.
 
+All XMPP-messages should be send with ```type="normal"```, as we have no direct conversation.
+
 ## User management
 
 As the project is using XMPP for its communication, we don't have to worry about user management. Every user has its own XMPP-ID and a ressource for the game itself. The XMPP-ID is stored in the queue so it's easy to assign the players.
@@ -22,3 +24,33 @@ All game clients priority should be ```-128```, the smallest priority available 
 ### Anonymous login
 
 If an user has no own XMPP-Account, an anonymous login should be available. The login should be provided by the XMPP-Server serving the matchmaker-account. The name should look like ```anonymous@battleship.me```. As the username is always the same, the clients must have different ressources. Thus, a resource could look like ```battleshipme_0a7d213d```.
+
+# Queue management
+
+## Queueing a player
+
+Clients request:
+
+```xml
+<message from='[client]' id='[id]' to='[matchbuilder]' type='normal'>
+  <battleship>
+    <action>queueing</action>
+    <status>request</status>
+  </battleship>
+</message>
+```
+
+Servers response:
+
+```xml
+<message from='[matchbuilder]' id='[id]' to='[client]' type='normal'>
+  <battleship>
+    <action>queueing</action>
+    <status>success</status>
+    
+    <queue>
+      <id>[the queue id]</id>
+    </queue>
+  </battleship>
+</message>
+```
