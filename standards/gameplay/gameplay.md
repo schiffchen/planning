@@ -10,7 +10,7 @@ Placing the boats will not be defined here as that information is not exchanged.
 
 ### The Dice Roll
 
-Both clients should roll a dice from 1 to 6 and send the result to the partner. The player with the bigger number is allowed to start the game.
+After they have placed their boats, both clients should roll a dice from 1 to 6 and send the result to the partner. If both players have submitted their number, both players should have placed their boats already. The player with the bigger number is allowed to start the game.
 
 #### Example
 
