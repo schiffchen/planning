@@ -19,8 +19,7 @@ Player B has a 4:
 ```xml
 <message from="[player_a]" id="[id]" to="[player_b]" type="normal">
   <battleship>
-    <action>starter</action>
-    <dice>4</dice>
+    <diceroll dice="4" />
   </battleship>
 </message>
 ```
@@ -30,8 +29,7 @@ Player B has a 5:
 ```xml
 <message from="[player_b]" id="[id]" to="[player_a]" type="normal">
   <battleship>
-    <action>starter</action>
-    <dice>5</dice>
+    <diceroll dice="5" />
   </battleship>
 </message>
 ```
@@ -51,11 +49,7 @@ The shooting client should send a action-stanza to the partner:
 ```xml
 <message from="[player_a]" id="[id]" to="[player_b]" type="normal">
   <battleship>
-    <action>fire</action>
-    <target>
-      <x>8</x>
-      <y>3</x>
-    </target>
+    <shoot x="8" y="3" />
   </battleship>
 </message>
 ```
@@ -65,14 +59,42 @@ The partner client should answer wheter the opponent hit a ship or not:
 ```xml
 <message from="[player_b]" id="[id]" to="[player_a]" type="normal">
   <battleship>
-    <action>fire</action>
-    <target>
-      <x>8</x>
-      <y>3</x>
-    </target>
-    <result>water</result>
+    <shoot x="8" y="3" result="water" />
   </battleship>
 </message>
 ```
 
-The ```result``` can be ```water``` or ```ship```. Both clients should display the shots in a suitable way.
+The ```result``` can be ```water``` or ```ship```. Both clients should display the shots in a suitable way. If a ship is destroyed, the partner client should provide information about that ship:
+
+```xml
+<message from="[player_b]" id="[id]" to="[player_a]" type="normal">
+  <battleship>
+    <shoot x="8" y="3" result="ship" />
+    <ship startx="4" starty="3" endx="8" endy="3" destroyed="true" />
+  </battleship>
+</message>
+```
+
+## Ending a game
+
+When a player has no more ships in the sea, the client has to end the game:
+
+```xml
+<message from="[player_a]" id="[id]" to="[player_b]" type="normal">
+  <battleship>
+    <gamestate state="end" looser="[player_a_jid]" />
+  </battleship>
+</message>
+```
+
+The other client should confirm the ended game with sending the same stanza back again:
+
+```xml
+<message from="[player_b]" id="[id]" to="[player_a]" type="normal">
+  <battleship>
+    <gamestate state="end" looser="[player_a_jid]" />
+  </battleship>
+</message>
+```
+
+The clients should now submit the statistical data to the matchmaker-server, see the matchmaker documentation for details.
