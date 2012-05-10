@@ -25,11 +25,11 @@ All game Clients priority should be ```-128```, the smallest priority available 
 
 If an user has no own XMPP-Account, an anonymous login should be available. The login should be provided by the XMPP-Server serving the matchmaker-account. The name should look like ```anonymous@battleship.me```. As the username is always the same, the Clients must have different ressources. Thus, a resource could look like ```battleshipme_0a7d213d```.
 
-# Queue management
+## Queue management
 
 All players without a game partner will be stored in a queue. When two matching partners are found, the system should assign the two players to each other and start a gaming session.
 
-## Queueing a player
+### Queueing a player
 
 The client should send a message to the server, asking for a place in the queue. The stanza should look like
 
@@ -57,7 +57,7 @@ The server will answer with a success code, if the queueing process was successf
 </message>
 ```
 
-## Assigning two players
+### Assigning two players
 
 When two matching players are found, the matchmaker should assign the two players. Thus, the matchmaker has to send messages to both players:
 
@@ -87,7 +87,7 @@ The clients should accept the assigning and sending an answer:
 
 When the clients accepts the assigning, the matchmaker should remove both clients from the query.
 
-# Statistics collecting
+## Statistics collecting
 
 After a game is finished, the matchmaker should collect informational ressources. Thus, the client has to send the informations to the matchmaker:
 
