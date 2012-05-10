@@ -56,3 +56,27 @@ The Server will answer with a success code, if the queueing process was successf
   </battleship>
 </message>
 ```
+
+## Assigning two players
+
+When two matching players are found, the Gamematcher should assign the two players. Thus, the Gamematcher has to send messages to both players:
+
+```xml
+<message from='[matchbuilder]' id='[id]' to='[client]' type='normal'>
+  <battleship>
+    <action>assigning</action>
+    <partner jid="[partner's jid]" />
+  </battleship>
+</message>
+```
+
+The Clients should accept the assigning and sending an answer:
+
+```xml
+<message from='[client]' id='[id]' to='[matchbuilder]' type='normal'>
+  <battleship>
+    <action>assigning</action>
+    <status>success</status>
+  </battleship>
+</message>
+```
