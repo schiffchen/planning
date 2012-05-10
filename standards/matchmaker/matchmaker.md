@@ -34,7 +34,7 @@ All players without a game partner will be stored in a queue. When two matching 
 The Client should send a message to the Server, asking for a place in the queue. The stanza should look like
 
 ```xml
-<message from='[client]' id='[id]' to='[matchbuilder]' type='normal'>
+<message from="[client]" id="[id]" to="[matchbuilder]" type="normal">
   <battleship>
     <action>queueing</action>
     <status>request</status>
@@ -45,7 +45,7 @@ The Client should send a message to the Server, asking for a place in the queue.
 The Server will answer with a success code, if the queueing process was successful. The Server also should send the queue id to allow the Client additional communication and identification.
 
 ```xml
-<message from='[matchbuilder]' id='[id]' to='[client]' type='normal'>
+<message from="[matchbuilder]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>queueing</action>
     <status>success</status>
@@ -62,10 +62,10 @@ The Server will answer with a success code, if the queueing process was successf
 When two matching players are found, the Gamematcher should assign the two players. Thus, the Gamematcher has to send messages to both players:
 
 ```xml
-<message from='[matchbuilder]' id='[id]' to='[client]' type='normal'>
+<message from="[matchbuilder]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>assigning</action>
-    <partner jid="[partner's jid]" />
+    <partner jid="[partners jid]" />
   </battleship>
 </message>
 ```
@@ -73,7 +73,7 @@ When two matching players are found, the Gamematcher should assign the two playe
 The Clients should accept the assigning and sending an answer:
 
 ```xml
-<message from='[client]' id='[id]' to='[matchbuilder]' type='normal'>
+<message from="[client]" id="[id]" to="[matchbuilder]" type="normal">
   <battleship>
     <action>assigning</action>
     <status>success</status>
