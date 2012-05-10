@@ -65,7 +65,10 @@ When two matching players are found, the matchmaker should assign the two player
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>assigning</action>
-    <partner>[partners jid]</partner>
+    <partner>
+      <jid>[partners jid]</jid>
+      <queueid>[partners queueid]</queueid>
+    </partner>
     <match>[match id]</match>
   </battleship>
 </message>
