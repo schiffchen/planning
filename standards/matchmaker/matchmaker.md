@@ -36,8 +36,7 @@ The client should send a message to the server, asking for a place in the queue.
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
-    <action>queueing</action>
-    <status>request</status>
+    <queueing action="request" />
   </battleship>
 </message>
 ```
@@ -47,12 +46,8 @@ The server will answer with a success code, if the queueing process was successf
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
-    <action>queueing</action>
-    <status>success</status>
-    
-    <queue>
-      <id>[the queue id]</id>
-    </queue>
+    <queueing action="success" />
+    <queue id="[the queue id]" />
   </battleship>
 </message>
 ```
@@ -64,12 +59,9 @@ When two matching players are found, the matchmaker should assign the two player
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
-    <action>assigning</action>
-    <partner>
-      <jid>[partners jid]</jid>
-      <queueid>[partners queueid]</queueid>
-    </partner>
-    <match>[match id]</match>
+    <queueing action="assign" />
+    <partner jid="[partners jid]" />
+    <match mid="[match id]" />
   </battleship>
 </message>
 ```
@@ -81,9 +73,9 @@ The clients should accept the assigning and sending an answer:
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
-    <action>assigning</action>
-    <match>[match id]</match>
-    <status>success</status>
+    <queueing action="assigned" />
+    <partner jid="[partners jid]" />
+    <match mid="[match id]" />
   </battleship>
 </message>
 ```
@@ -97,11 +89,7 @@ After a game is finished, the matchmaker should collect informational ressources
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
-    <action>result</action>
-    <match>[match id]</match>
-    <result>
-      <winner>[partners jid]</winner>
-    </result>
+    <result mid="[match id]" winner="[winners jid]" />
   </battleship>
 </message>
 ```
@@ -111,9 +99,7 @@ The matchmaker should store that information, but it should be hidden by default
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
-    <action>result</action>
-    <status>success</status>
-    <match>[match id]</match>
+    <result status="saved" mid="[match id]" winner="[winners jid]" />
   </battleship>
 </message>
 ```
