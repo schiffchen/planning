@@ -35,7 +35,7 @@ The client should send a message to the server, asking for a place in the queue.
 
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <queueing action="request" />
   </battleship>
 </message>
@@ -45,7 +45,7 @@ The server will answer with a success code, if the queueing process was successf
 
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <queueing action="success" />
     <queue id="[the queue id]" />
   </battleship>
@@ -58,7 +58,7 @@ When two matching players are found, the matchmaker should assign the two player
 
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <queueing action="assign" />
     <partner jid="[partners jid]" />
     <match mid="[match id]" />
@@ -72,7 +72,7 @@ The clients should accept the assigning and sending an answer:
 
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <queueing action="assigned" />
     <partner jid="[partners jid]" />
     <match mid="[match id]" />
@@ -88,7 +88,7 @@ After a game is finished, the matchmaker should collect informational ressources
 
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <result mid="[match id]" winner="[winners jid]" />
   </battleship>
 </message>
@@ -98,7 +98,7 @@ The matchmaker should store that information, but it should be hidden by default
 
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
-  <battleship>
+  <battleship xmlns="http://battleship.me/xmlns/">
     <result status="saved" mid="[match id]" winner="[winners jid]" />
   </battleship>
 </message>
