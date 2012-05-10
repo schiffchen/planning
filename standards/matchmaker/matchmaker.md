@@ -65,10 +65,13 @@ When two matching players are found, the matchmaker should assign the two player
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>assigning</action>
-    <partner jid="[partners jid]" />
+    <partner>[partners jid]</partner>
+    <match>[match id]</match>
   </battleship>
 </message>
 ```
+
+The match id should be a random but unique ID. It will be used to assign the statistical data to a match.
 
 The clients should accept the assigning and sending an answer:
 
@@ -76,9 +79,38 @@ The clients should accept the assigning and sending an answer:
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
     <action>assigning</action>
+    <match>[match id]</match>
     <status>success</status>
   </battleship>
 </message>
 ```
 
 When the clients accepts the assigning, the matchmaker should remove both clients from the query.
+
+# Statistics collecting
+
+After a game is finished, the matchmaker should collect informational ressources. Thus, the client has to send the informations to the matchmaker:
+
+```xml
+<message from="[client]" id="[id]" to="[matchmaker]" type="normal">
+  <battleship>
+    <action>result</action>
+    <match>[match id]</match>
+    <result>
+      <winner>[partners jid]</winner>
+    </result>
+  </battleship>
+</message>
+```
+
+The matchmaker should store that information, but it should be hidden by default. If both players sent the same result, the statistic-entry should be activated and used for further calculations. The server should response to the incoming result-data:
+
+```xml
+<message from="[matchmaker]" id="[id]" to="[client]" type="normal">
+  <battleship>
+    <action>result</action>
+    <status>success</status>
+    <match>[match id]</match>
+  </battleship>
+</message>
+```
