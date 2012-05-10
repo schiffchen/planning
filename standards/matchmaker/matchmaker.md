@@ -31,10 +31,10 @@ All players without a game partner will be stored in a queue. When two matching 
 
 ## Queueing a player
 
-The Client should send a message to the Server, asking for a place in the queue. The stanza should look like
+The client should send a message to the server, asking for a place in the queue. The stanza should look like
 
 ```xml
-<message from="[client]" id="[id]" to="[matchbuilder]" type="normal">
+<message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
     <action>queueing</action>
     <status>request</status>
@@ -42,10 +42,10 @@ The Client should send a message to the Server, asking for a place in the queue.
 </message>
 ```
 
-The Server will answer with a success code, if the queueing process was successful. The Server also should send the queue id to allow the Client additional communication and identification.
+The server will answer with a success code, if the queueing process was successful. The server also should send the queue id to allow the client additional communication and identification.
 
 ```xml
-<message from="[matchbuilder]" id="[id]" to="[client]" type="normal">
+<message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>queueing</action>
     <status>success</status>
@@ -59,10 +59,10 @@ The Server will answer with a success code, if the queueing process was successf
 
 ## Assigning two players
 
-When two matching players are found, the Gamematcher should assign the two players. Thus, the Gamematcher has to send messages to both players:
+When two matching players are found, the matchmaker should assign the two players. Thus, the matchmaker has to send messages to both players:
 
 ```xml
-<message from="[matchbuilder]" id="[id]" to="[client]" type="normal">
+<message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship>
     <action>assigning</action>
     <partner jid="[partners jid]" />
@@ -70,13 +70,15 @@ When two matching players are found, the Gamematcher should assign the two playe
 </message>
 ```
 
-The Clients should accept the assigning and sending an answer:
+The clients should accept the assigning and sending an answer:
 
 ```xml
-<message from="[client]" id="[id]" to="[matchbuilder]" type="normal">
+<message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship>
     <action>assigning</action>
     <status>success</status>
   </battleship>
 </message>
 ```
+
+When the clients accepts the assigning, the matchmaker should remove both clients from the query.
