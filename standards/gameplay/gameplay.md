@@ -70,10 +70,12 @@ The ```result``` can be ```water``` or ```ship```. Both clients should display t
 <message from="[player_b]" id="[id]" to="[player_a]" type="normal">
   <battleship xmlns="http://battleship.me/xmlns/">
     <shoot x="8" y="3" result="ship" />
-    <ship startx="4" starty="3" endx="8" endy="3" destroyed="true" />
+    <ship x="4" y="3" size="4" orientation="horizontal" destroyed="true" />
   </battleship>
 </message>
 ```
+
+```x``` and ```y``` indicate the top left position of the ship. ```Orientation``` can be ```horizontal``` or ```vertical```.
 
 ## Ending a game
 
