@@ -52,6 +52,28 @@ The server will answer with a success code, if the queueing process was successf
 </message>
 ```
 
+#### Queue timeouts
+
+The enqueued client has to send a ping to the matchmaker every 15 seconds, otherwise the matchmaker should delete the queue position after 30 seconds.
+
+```xml
+<message from="[client]" id="[id]" to="[matchmaker]" type="normal">
+  <battleship xmlns="http://battleship.me/xmlns/">
+    <queueing action="ping" id="[the queue id]" />
+  </battleship>
+</message>
+```
+
+The matchmaker should confirm this ping by sending it back:
+
+```xml
+<message from="[matchmaker]" id="[id]" to="[client]" type="normal">
+  <battleship xmlns="http://battleship.me/xmlns/">
+    <queueing action="ping" id="[the queue id]" />
+  </battleship>
+</message>
+```
+
 ### Assigning two players
 
 When two matching players are found, the matchmaker should assign the two players. Thus, the matchmaker has to send messages to both players:
