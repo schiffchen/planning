@@ -46,8 +46,7 @@ The server will answer with a success code, if the queueing process was successf
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship xmlns="http://battleship.me/xmlns/">
-    <queueing action="success" />
-    <queue id="[the queue id]" />
+    <queueing action="success" id="[the queue id]" />
   </battleship>
 </message>
 ```
