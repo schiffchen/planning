@@ -80,9 +80,7 @@ When two matching players are found, the matchmaker should assign the two player
 ```xml
 <message from="[matchmaker]" id="[id]" to="[client]" type="normal">
   <battleship xmlns="http://battleship.me/xmlns/">
-    <queueing action="assign" />
-    <partner jid="[partners jid]" />
-    <match mid="[match id]" />
+    <queueing action="assign" jid="[partners jid]" mid="[match id]" />
   </battleship>
 </message>
 ```
@@ -94,9 +92,7 @@ The clients should accept the assigning and sending an answer:
 ```xml
 <message from="[client]" id="[id]" to="[matchmaker]" type="normal">
   <battleship xmlns="http://battleship.me/xmlns/">
-    <queueing action="assigned" />
-    <partner jid="[partners jid]" />
-    <match mid="[match id]" />
+    <queueing action="assigned" jid="[partners jid]" mid="[match id]" />
   </battleship>
 </message>
 ```
