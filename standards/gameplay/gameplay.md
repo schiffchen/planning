@@ -100,3 +100,17 @@ The other client should confirm the ended game with sending the same stanza back
 ```
 
 The clients should now submit the statistical data to the matchmaker-server, see the matchmaker documentation for details.
+
+## Pinging around
+
+Both players should send a ping to the opposite every 10 seconds:
+
+```xml
+<message from="[player_a]" id="[id]" to="[player_b]" type="normal">
+  <battleship xmlns="http://battleship.me/xmlns/">
+    <ping />
+  </battleship>
+</message>
+```
+
+The opposite player should not answer to that pings, but he should quit the game if he got no ping for a long time.
