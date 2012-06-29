@@ -38,7 +38,7 @@ There are 4 types of ships:
 
 Before a round starts both players have to place their ships onto the playround. Each player has to place 1 aircraft carrier, 1 battleship, 2 submarines and 1 destroyer.  
 
-A ship can be placed horizontal or vertical but never diagonal. Also it's not allowed to place 2 ships side by side. However ships can be placed to diagonally adjacent fields i.e. if a ship ends at field D5 another ship may start at field E6.  
+A ship can be placed horizontal or vertical but never diagonal.  
 
 If both players have placed their ships the game starts.
 
